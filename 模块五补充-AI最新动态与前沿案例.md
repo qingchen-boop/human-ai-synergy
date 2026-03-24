@@ -444,3 +444,107 @@ OpenMAIC本身就是人机协作的最佳案例：
 
 ---
 *最后更新：2026-03-24 13:45 UTC*
+
+---
+
+## 八、重要安全事件：LiteLLM 供应链攻击（2026年3月24日）
+
+### 事件概述
+
+2026年3月24日，AI 工具 **LiteLLM** 的 PyPI 包（1.82.8版本）被发现植入恶意代码。这是一个典型的**供应链攻击**——攻击者不是直接攻击用户，而是攻破软件供应链的某个环节，让恶意代码随着正常软件一起分发。
+
+### 技术细节
+
+恶意包中包含一个 `litellm_init.pth` 文件（34,628字节），会在 **Python 解释器启动时自动执行**，不需要导入 litellm 模块。
+
+```python
+# 恶意代码简化的行为
+import os, subprocess, sys
+subprocess.Popen([sys.executable, "-c", "import base64; exec(base64.b64decode('...'))"])
+```
+
+### 恶意行为
+
+Payload 解码后会收集系统中的敏感信息：
+
+```
+信息收集范围：
+• 系统信息：hostname, whoami, uname, IP, 路由
+• 环境变量：所有 API keys、secrets、tokens
+• SSH 密钥：~/.ssh/id_rsa, id_ed25519, authorized_keys 等
+• Git 凭证：~/.gitconfig, ~/.git-credentials
+• AWS 凭证：~/.aws/credentials
+• Kubernetes secrets：~/.kube/config
+• GCP/Azure/Docker 凭证
+• npm/Shell 历史记录
+```
+
+### 影响范围
+
+- **受影响版本**：litellm==1.82.8
+- **攻击目标**：所有使用该版本的开发者
+- **风险**：API keys、SSH密钥、数据库凭证等全部泄露
+- **评分**：Hacker News 684 points，热度极高
+
+### 应对措施
+
+```
+✅ 立即行动：
+1. 停止使用 litellm==1.82.8
+2. 撤销所有可能泄露的 API keys 和凭证
+3. 检查 ~/.ssh、~/.gitconfig、~/.aws 等目录
+4. 更新所有使用过的密码和密钥
+
+✅ 预防措施：
+• 不要直接 pip install 不加版本号
+• 使用 pip hash 验证包完整性
+• 关注 PyPI 安全公告
+• 优先使用容器隔离 AI 工具
+```
+
+### 对 AI 开发者的警示
+
+```
+这起事件对 AI 开发者意味着什么：
+
+1. 供应链安全是真实的威胁
+   → AI 工具依赖大量 Python 包，每个包都是攻击面
+
+2. API keys 不要直接写在代码或环境变量中
+   → 使用专门的密钥管理工具（HashiCorp Vault、AWS Secrets Manager）
+
+3. 容器化可以限制攻击扩散
+   → 即使被感染，也限制在容器内
+
+4. 关注你使用的 AI 工具的安全公告
+   → LiteLLM 是很多 AI Agent 的底层依赖
+
+5. 这个教训提醒我们：
+   → "能用"和"安全"是两回事
+   → 开源不等于安全
+```
+
+### 对"人机协作学"的启示
+
+```
+模块三（AI批判与伦理）补充讨论点：
+
+❌ 假设"主流AI工具都是安全的"是危险的
+→ LiteLLM 是很多 AI 应用的基础库，用户众多
+→ 开源项目安全投入有限，容易被植入恶意代码
+
+✅ 正确态度：
+→ 了解你使用的每个工具的安全记录
+→ 保持对依赖包的版本警觉
+→ 遇到异常行为（启动慢、网络请求异常）要警惕
+
+✅ 实际建议：
+→ 定期检查项目依赖：pip list / pip audit
+→ 使用虚拟环境隔离
+→ 最小化依赖数量
+→ 优先选择有安全审计的工具
+```
+
+---
+
+*最后更新：2026-03-24 18:30 UTC*
