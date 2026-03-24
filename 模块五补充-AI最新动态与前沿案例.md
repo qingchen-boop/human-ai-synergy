@@ -376,4 +376,68 @@ OpenMAIC本身就是人机协作的最佳案例：
 
 ---
 
+## 📰 本次更新（2026-03-24）
+
+### 来源：MIT Technology Review
+
+**Moltbook — AI社交网络的峰值表现**
+> "Moltbook was peak AI theater" (2026.02)
+> Moltbook 是一个病毒式传播的AI社交网络，其设计揭示了当前社会对AI agent的狂热程度远超其实际能力。评论指出：人们在Moltbook上与bot的互动，更多反映的是我们对AI现状的痴迷，而非AI agent的未来潜力。
+
+**核心观点：** 当前的AI agent狂热可能更多是"剧场效应"——人们热衷于观看和参与，而非真正依赖AI agent完成重要任务。对AI agent的期待与实际能力之间存在显著落差。
+
+**对学习者的启示：** 模块四中"识别AI过度依赖"的内容值得特别关注。当AI表现出看似智能的行为时，需警惕将其能力泛化。
+
+---
+
+### 来源：Hacker News
+
+**🔥 LiteLLM Python包遭遇供应链攻击** (2026.03.24)
+- Python AI开发工具LiteLLM的包被植入恶意代码
+- 供应链安全成为AI工具链的核心议题
+- 影响范围：所有使用问题版本的开发者
+
+**NanoClaw 发布 Agent Vault 功能**
+- NanoClaw（OpenClaw生态的一部分）推出Agent Vault
+- 专门针对Agent的安全凭证管理方案
+- 体现Agent生态的安全基础设施正在完善
+
+**Missile Defense Is NP-Complete** (学术研究)
+- 计算复杂性理论在国防系统中的应用
+- 展示了AI/算法在关键系统中的局限性
+
+---
+
+### 行业动态（机器之心 Week 12 摘要）
+
+- **Nvidia GTC 大会：** 发布 Vera Rubin 架构算力平台
+- **OpenAI：** 收购 Python 开发工具初创公司 Astral（代码Agent领域布局）
+- **Harness vs Context：** Agent工程优化的新方向——Harness被认为是比单纯增加Context更有效的优化策略
+
+---
+
+### 📌 本次更新要点
+
+```
+本周AI领域关键信号：
+
+1. 安全风险上升
+   → LiteLLM供应链攻击敲响警钟
+   → 使用AI工具时需注意依赖安全管理
+
+2. Agent基础设施完善
+   → NanoClaw Agent Vault等安全方案涌现
+   → Agent生态正在向生产级安全演进
+
+3. 期待与现实的落差
+   → MIT评Moltbook为"AI剧场"
+   → 提醒学习者：理解AI真实能力边界比追逐热点更重要
+
+4. 工程优化方向转变
+   → "Harness"成为Agent优化的新关键词
+   → 从"给更多context"到"更好的工程架构"
+```
+
+---
+
 *本文档随AI发展持续更新*
