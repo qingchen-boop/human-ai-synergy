@@ -443,7 +443,49 @@ OpenMAIC本身就是人机协作的最佳案例：
 *本文档随AI发展持续更新*
 
 ---
-*最后更新：2026-03-24 13:45 UTC*
+*最后更新：2026-03-24 23:31 UTC*
+
+---
+
+## 八、Arm AGI CPU — 芯片巨头入局 Agent 时代
+
+### 事件概述
+
+2026年3月24日，Arm 官方博客宣布推出 **Arm AGI CPU**——专门为"Agentic AI Cloud Era（Agent 驱动的 AI 云时代）"设计的新一代芯片。
+
+### 核心内容
+
+Arm CEO 在博客中表示：
+
+> "AI 系统正以全球规模持续运行。过去，人是计算的瓶颈——人与系统交互的速度决定了工作推进的速度。在 Agent 时代，这个限制消失了——软件 Agent 协调任务、与多个模型交互、实时做出决策。"
+
+关键观点：
+- **CPU 成为现代 AI 基础设施的"核心调度元素"**
+- 在 AI 数据中心，CPU 负责管理数千个分布式任务：协调加速器、管理内存和存储、调度工作负载
+- **现在，Agent 时代新增了：跨大量 Agent 的 fan-out 协调**
+
+### 技术背景
+
+Arm AGI CPU 基于 **Arm Neoverse** 平台构建，这是 Arm 35年历史上首次直接推出自研芯片产品（而非仅授权 IP）。
+
+已知采用 Neoverse 的平台：
+- AWS Graviton
+- Google Axion
+- Microsoft Cobalt
+
+### 对"人机协作学"的启示
+
+```
+• Agent 时代需要专门的芯片架构 —— CPU 的角色从"通用计算"演变为"Agent 协调"
+• 硬件基础设施在为 Agent 时代重新设计
+• 未来的 AI 基础设施将更多由 Agent 协调驱动
+→ Module 5（前沿与未来）中 Agent 基础设施相关内容得到硬件层面的印证
+```
+
+### 新闻来源
+
+Arm 官方博客：https://newsroom.arm.com/blog/introducing-arm-agi-cpu
+Hacker News 讨论：243 points，197 条评论
 
 ---
 
