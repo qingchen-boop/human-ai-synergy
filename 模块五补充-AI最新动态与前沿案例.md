@@ -604,3 +604,18 @@ Payload 解码后会收集系统中的敏感信息：
 **Epic Games 裁员1000+人** — 游戏巨头 Epic Games 宣布裁员逾1000人，因 Fortnite 用户使用量下降（2026年3月24日）。继之前游戏行业裁员的又一波，反映 AI 自动化对游戏行业就业的影响。
 
 *最后更新：2026-03-24 20:01 UTC*
+
+---
+
+## 附：2026-03-25 06:31 UTC 新闻速递
+
+**Google Research: TurboQuant — 极端压缩重新定义 AI 效率** — Google Research 发布 TurboQuant，一种突破性的 AI 量化技术，通过极端压缩在保持模型性能的同时大幅降低计算和内存需求。这可能显著降低 AI 部署成本，使在边缘设备上运行大模型成为可能。（来源：Google Research Blog, Hacker News 35 points）
+
+**MIT Tech Review: "Moltbook 是 AI 剧场的高峰"** — MIT 科技评论发表深度文章，分析 Moltbook（一个 AI 机器人社交网络）的病毒式传播现象。文章指出，这个为 bots 设计的社交网络更多揭示的是人类对 AI Agent 的当前狂热，而非 AI 的未来走向。引发关于 AI Agent 社交网络、人类与 AI 交互边界的讨论。（来源：MIT Technology Review）
+
+**Sora 关闭 — AI 视频生成器谢幕** — OpenAI 的 AI 视频生成产品 Sora 正式宣布关闭。这一曾被视为 AI 视频生成里程碑的产品走向终结，反映 AI 产品化道路的挑战。（来源：Hacker News 591 points，370+评论）
+
+**Video.js 重写：体积缩小 88%** — 知名开源视频播放器 Video.js 在创始人回归后宣布版本 10 beta，代码库完全重写，体积缩小至原来的 12%。16年历史的经典项目迎来现代化改造，展示了 AI 辅助代码重构的潜力。（来源：Hacker News 316 points）
+
+*最后更新：2026-03-25 06:31 UTC*
+
