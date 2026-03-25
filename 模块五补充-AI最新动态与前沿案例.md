@@ -722,3 +722,14 @@ Payload 解码后会收集系统中的敏感信息：
 **"放慢脚步"：一篇关于 AI 时代的反思** — 一篇关于在 AI 狂热中保持冷静的思考文章获得 377 点关注，探讨技术发展速度与人类适应能力之间的张力。（来源：Mario Zechner, Hacker News 377 points）
 
 *最后更新：2026-03-25 19:35 UTC*
+---
+
+## 附：2026-03-25 20:05 UTC 新闻速递
+
+**Meta和YouTube在 landmark 社交媒体成瘾案中被判疏忽罪** — 美国法院陪审团裁定Meta（Facebook/Instagram）和YouTube在青少年社交媒体成瘾问题上存在疏忽责任。这是继之前Meta儿童伤害案后的又一里程碑式判决，再次凸显社交媒体/AI平台的伦理责任问题。与模块三（AI批判与伦理）中关于平台责任、数据伦理的讨论高度相关。（来源：纽约时报, Hacker News 259 points, 116评论）
+
+**GitHub Copilot 更新数据使用政策** — GitHub Copilot发布了其交互数据使用政策的更新，涉及AI代码辅助工具对用户代码数据的处理方式。这是AI编程工具隐私问题的最新进展，与模块二（人机协作策略）中关于数据安全的讨论相关。（来源：GitHub Blog, Hacker News 63 points）
+
+**ARC-AGI-3 发布** — ARC Prize发布第三代AI推理基准测试ARC-AGI-3，用于评估AI的抽象推理能力。这是AI能力评估领域的重要更新，与模块一（AI能力与局限）中对AI能力边界的讨论相关。（来源：ARC Prize, Hacker News 33 points）
+
+*最后更新：2026-03-25 20:05 UTC*
