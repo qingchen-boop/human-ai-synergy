@@ -14,6 +14,18 @@
 **课程关联：** 与模块一（AI能力与局限）、模块五（前沿与未来）高度相关，帮助理解当前AI与真正通用智能的差距。  
 **链接：** https://arcprize.org/arc-agi/3
 
+#### AI编程工具大规模采用 — 90% Claude相关输出进入GitHub仓库
+**来源：** Hacker News / Claude's Code 统计（2026-03-26）  
+**为什么重要：** 数据显示，AI编程助手Claude的代码输出中，90%最终以`Co-Authored-By`标签进入GitHub仓库，表明AI编程工具已在真实开发流程中大规模落地。这一数据远超过许多人预期，显示开发者对AI辅助编程的接受度迅速提升。  
+**课程关联：** 与模块二（人机协作策略）、模块四（AI时代个人发展）高度相关，反映AI如何改变软件开发行业的工作方式。  
+**链接：** https://news.ycombinator.com/item?id=47521157
+
+#### 学术论文诚信问题 — 虚假声明在高引用论文中蔓延
+**来源：** Columbia University Statistical Modeling（2026-03-24）  
+**为什么重要：** 研究发现部分高引用学术论文存在未经纠正的虚假声明，且无任何后果。这一现象在AI相关领域尤为突出，因该领域发表速度快、竞争激烈。提示我们：**即使是"学术权威"来源也需要批判性评估**，不可盲目引用。  
+**课程关联：** 与模块三（AI批判与伦理）、逻辑学基础模块（批判性思维工具）高度相关，提醒学习者对信息来源保持审慎态度。  
+**链接：** https://statmodeling.stat.columbia.edu/2026/03/24/false-claims-in-a-published-no-corrections-no-consequences-welcome-to-the-business-school/
+
 ---
 
 ## 为什么需要追踪AI新闻？
