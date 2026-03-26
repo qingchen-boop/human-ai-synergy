@@ -22,6 +22,12 @@
 **课程关联：** 与模块一（AI能力与局限）、模块五（前沿与未来）高度相关，帮助理解当前AI与真正通用智能的差距。  
 **链接：** https://arcprize.org/arc-agi/3
 
+#### LiteLLM 恶意软件攻击事件
+**来源：** Hacker News / FutureSearch（2026-03-26）  
+**为什么重要：** 这是一起针对AI基础设施（LiteLLM）的恶意软件攻击事件，反映了AI系统面临的安全威胁。AI代理（Agent）调用外部工具时可能引入新的攻击面。  
+**课程关联：** 与模块三（AI批判与伦理）、模块四（AI时代个人发展）相关，涉及AI安全与风险防范。  
+**链接：** https://futuresearch.ai/blog/litellm-attack-transcript/
+
 #### AI编程工具大规模采用 — 90% Claude相关输出进入GitHub仓库
 **来源：** Hacker News / Claude's Code 统计（2026-03-26）  
 **为什么重要：** 数据显示，AI编程助手Claude的代码输出中，90%最终以`Co-Authored-By`标签进入GitHub仓库，表明AI编程工具已在真实开发流程中大规模落地。这一数据远超过许多人预期，显示开发者对AI辅助编程的接受度迅速提升。  
