@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""生成人机协作学 PDF 教材"""
+"""生成人机协作学 PDF 教材（中文优化版）"""
 
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 import os
+
+# 注册中文字体
+pdfmetrics.registerFont(UnicodeCIDFont('STSong-Light'))
+# STHeiti not available, skip
 
 # 颜色定义
 PRIMARY = colors.HexColor('#2B5C9E')
@@ -29,83 +35,91 @@ def create_pdf():
     )
     
     styles = getSampleStyleSheet()
+    FONT_NAME = 'STSong-Light'
+    FONT_NAME_BOLD = 'STSong-Light'
     
     # 自定义样式
     title_style = ParagraphStyle(
         'CustomTitle',
         parent=styles['Title'],
+        fontName=FONT_NAME_BOLD,
         fontSize=28,
         textColor=PRIMARY,
         spaceAfter=30,
         alignment=TA_CENTER,
-        fontName='Helvetica-Bold'
     )
     
     heading1_style = ParagraphStyle(
         'CustomH1',
         parent=styles['Heading1'],
-        fontSize=20,
+        fontName=FONT_NAME_BOLD,
+        fontSize=18,
         textColor=PRIMARY,
-        spaceBefore=25,
-        spaceAfter=15,
-        fontName='Helvetica-Bold'
+        spaceBefore=20,
+        spaceAfter=12,
     )
     
     heading2_style = ParagraphStyle(
         'CustomH2',
         parent=styles['Heading2'],
-        fontSize=16,
+        fontName=FONT_NAME_BOLD,
+        fontSize=14,
         textColor=SECONDARY,
-        spaceBefore=18,
-        spaceAfter=10,
-        fontName='Helvetica-Bold'
+        spaceBefore=15,
+        spaceAfter=8,
     )
     
     heading3_style = ParagraphStyle(
         'CustomH3',
         parent=styles['Heading3'],
-        fontSize=13,
+        fontName=FONT_NAME_BOLD,
+        fontSize=12,
         textColor=ACCENT,
-        spaceBefore=12,
-        spaceAfter=8,
-        fontName='Helvetica-Bold'
+        spaceBefore=10,
+        spaceAfter=6,
     )
     
     body_style = ParagraphStyle(
         'CustomBody',
         parent=styles['Normal'],
-        fontSize=11,
+        fontName=FONT_NAME,
+        fontSize=10,
         textColor=TEXT,
-        spaceAfter=8,
+        spaceAfter=6,
         alignment=TA_JUSTIFY,
-        leading=16
+        leading=14
     )
     
     bullet_style = ParagraphStyle(
         'CustomBullet',
         parent=styles['Normal'],
-        fontSize=11,
+        fontName=FONT_NAME,
+        fontSize=10,
         textColor=TEXT,
-        spaceAfter=4,
-        leftIndent=20,
-        leading=14
+        spaceAfter=3,
+        leftIndent=15,
+        leading=13
     )
     
     story = []
     
     # ===== 封面 =====
-    story.append(Spacer(1, 5*cm))
+    story.append(Spacer(1, 4*cm))
     story.append(Paragraph("人机协作学", title_style))
     story.append(Spacer(1, 0.5*cm))
     story.append(Paragraph("Personal Empowerment in the AI Era", 
-        ParagraphStyle('Subtitle', parent=styles['Normal'], fontSize=16, textColor=SECONDARY, alignment=TA_CENTER)))
+        ParagraphStyle('Subtitle', fontName=FONT_NAME, fontSize=14, textColor=SECONDARY, alignment=TA_CENTER)))
     story.append(Spacer(1, 2*cm))
-    story.append(Paragraph("—— AI时代个人能力提升指南 ——", 
-        ParagraphStyle('Desc', parent=styles['Normal'], fontSize=12, textColor=TEXT, alignment=TA_CENTER)))
+    story.append(Paragraph("AI时代个人能力提升指南", 
+        ParagraphStyle('Desc', fontName=FONT_NAME, fontSize=11, textColor=TEXT, alignment=TA_CENTER)))
+    story.append(Spacer(1, 3*cm))
+    story.append(Paragraph("小曦 设计 | 2026年3月", 
+        ParagraphStyle('Credit', fontName=FONT_NAME, fontSize=10, textColor=TEXT, alignment=TA_CENTER)))
     story.append(PageBreak())
     
     # ===== 目录 =====
     story.append(Paragraph("目录", heading1_style))
+    story.append(Spacer(1, 0.3*cm))
     toc_items = [
         "第一章：学科纲要",
         "第二章：AI能力与局限",
@@ -118,6 +132,7 @@ def create_pdf():
         "附录A：常见问题FAQ",
         "附录B：习题答案",
         "附录C：配套学习资源",
+        "附录D：逻辑学基础（从零自学）",
     ]
     for item in toc_items:
         story.append(Paragraph(item, bullet_style))
@@ -138,43 +153,37 @@ def create_pdf():
         in_code_block = False
         
         for line in lines:
-            # 跳过文件头部的元信息
-            if line.startswith('> ') or line.startswith('# ') and '---' in line:
-                continue
             if line.startswith('```'):
                 in_code_block = not in_code_block
                 continue
             if in_code_block:
                 continue
-            
-            # 处理标题
+            if line.startswith('> ') or line.startswith('# ') and '---' in line:
+                continue
             if line.startswith('### '):
                 result.append(('h3', line[4:].strip()))
             elif line.startswith('## '):
                 result.append(('h2', line[3:].strip()))
             elif line.startswith('# '):
                 result.append(('h1', line[2:].strip()))
-            elif line.startswith('**') and line.endswith('**'):
-                result.append(('bold', line[2:-2].strip()))
             elif line.startswith('- [x]') or line.startswith('- [ ]'):
-                continue  # 跳过复选框
+                continue
             elif line.startswith('- '):
                 result.append(('bullet', line[2:].strip()))
             elif line.startswith('| '):
-                continue  # 跳过表格（简化处理）
+                continue
             elif line.strip() == '' or line.startswith('---'):
                 result.append(('spacer', ''))
             elif line.startswith('*') and line.endswith('*'):
                 result.append(('italic', line[1:-1].strip()))
             else:
-                # 清理 Markdown 特殊符号
                 clean = line.replace('**', '').replace('*', '').replace('`', '').strip()
                 if clean:
                     result.append(('para', clean))
         
         return result
     
-    def add_md_file(filename, title_override=None):
+    def add_md_file(filename):
         """添加一个 Markdown 文件到 PDF"""
         content = read_md(filename)
         if not content:
@@ -189,16 +198,12 @@ def create_pdf():
                 story.append(Paragraph(part[1], heading2_style))
             elif part[0] == 'h3':
                 story.append(Paragraph(part[1], heading3_style))
-            elif part[0] == 'bold':
-                story.append(Paragraph(f"<b>{part[1]}</b>", body_style))
-            elif part[0] == 'italic':
-                story.append(Paragraph(f"<i>{part[1]}</i>", body_style))
             elif part[0] == 'bullet':
-                story.append(Paragraph(f"• {part[1]}", bullet_style))
+                story.append(Paragraph("· " + part[1], bullet_style))
             elif part[0] == 'para':
                 story.append(Paragraph(part[1], body_style))
             elif part[0] == 'spacer':
-                story.append(Spacer(1, 0.3*cm))
+                story.append(Spacer(1, 0.2*cm))
     
     # ===== 第一章：学科纲要 =====
     story.append(Paragraph("第一章：学科纲要", heading1_style))
@@ -208,35 +213,35 @@ def create_pdf():
     # ===== 第二章：AI能力与局限 =====
     story.append(Paragraph("第二章：AI能力与局限", heading1_style))
     add_md_file("2-模块一：AI能力与局限.md")
-    story.append(Spacer(1, 0.5*cm))
+    story.append(Spacer(1, 0.3*cm))
     add_md_file("模块一补充案例.md")
     story.append(PageBreak())
     
     # ===== 第三章：人机协作策略 =====
     story.append(Paragraph("第三章：人机协作策略", heading1_style))
     add_md_file("3-模块二：人机协作策略.md")
-    story.append(Spacer(1, 0.5*cm))
+    story.append(Spacer(1, 0.3*cm))
     add_md_file("模块二补充-提示工程模板库.md")
     story.append(PageBreak())
     
     # ===== 第四章：AI批判与伦理 =====
     story.append(Paragraph("第四章：AI批判与伦理", heading1_style))
     add_md_file("4-模块三：AI批判与伦理.md")
-    story.append(Spacer(1, 0.5*cm))
+    story.append(Spacer(1, 0.3*cm))
     add_md_file("模块三补充-AI偏见真实案例库.md")
     story.append(PageBreak())
     
     # ===== 第五章：AI时代个人发展 =====
     story.append(Paragraph("第五章：AI时代个人发展", heading1_style))
     add_md_file("5-模块四：AI时代个人发展.md")
-    story.append(Spacer(1, 0.5*cm))
+    story.append(Spacer(1, 0.3*cm))
     add_md_file("模块四补充-各职业的AI工作流示例.md")
     story.append(PageBreak())
     
     # ===== 第六章：前沿与未来 =====
     story.append(Paragraph("第六章：前沿与未来", heading1_style))
     add_md_file("6-模块五：前沿与未来.md")
-    story.append(Spacer(1, 0.5*cm))
+    story.append(Spacer(1, 0.3*cm))
     add_md_file("模块五补充-AI最新动态与前沿案例.md")
     story.append(PageBreak())
     
@@ -263,23 +268,25 @@ def create_pdf():
     # ===== 附录C：配套学习资源 =====
     story.append(Paragraph("附录C：配套学习资源", heading1_style))
     add_md_file("配套学习资源.md")
-    story.append(Spacer(1, 1*cm))
+    story.append(PageBreak())
     
-    # ===== 后记：学科宣言 =====
-    story.append(Paragraph("后记：学科宣言", heading1_style))
-    add_md_file("10-学科宣言.md")
+    # ===== 附录D：逻辑学基础 =====
+    story.append(Paragraph("附录D：逻辑学基础（从零自学）", heading1_style))
+    add_md_file("模块补充-逻辑学基础.md")
+    story.append(PageBreak())
     
     # ===== 结束页 =====
-    story.append(PageBreak())
-    story.append(Spacer(1, 5*cm))
+    story.append(Spacer(1, 4*cm))
     story.append(Paragraph("谢谢！", title_style))
     story.append(Spacer(1, 1*cm))
-    story.append(Paragraph("AI会越来越强，但你的判断力、创造力、同理心<br/>以及作为人的独特价值，永远不会被取代。<br/><br/>学会与AI协作，成为更好的自己。", 
-        ParagraphStyle('EndNote', parent=styles['Normal'], fontSize=12, textColor=TEXT, alignment=TA_CENTER, leading=20)))
+    story.append(Paragraph("AI会越来越强，但你的判断力、创造力、同理心，", body_style))
+    story.append(Paragraph("以及作为人的独特价值，永远不会被取代。", body_style))
+    story.append(Spacer(1, 0.5*cm))
+    story.append(Paragraph("学会与AI协作，成为更好的自己。", body_style))
     
     # 构建 PDF
     doc.build(story)
-    print("PDF 教材已生成：人机协作学-教材.pdf")
+    print("PDF 教材已生成（中文优化版）：人机协作学-教材.pdf")
 
 if __name__ == "__main__":
     create_pdf()
