@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""生成人机协作学 PDF 教材（中文优化版）"""
+"""生成《人机共智：AI时代的协作思维与实践》PDF教材"""
 
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -26,7 +26,7 @@ TEXT = colors.HexColor('#333333')
 def create_pdf():
     """创建 PDF 教材"""
     doc = SimpleDocTemplate(
-        "/home/xiaoxi/.openclaw/workspace/projects/human-ai-synergy/人机协作学-教材.pdf",
+        "/home/xiaoxi/.openclaw/workspace/projects/human-ai-synergy/人机共智-教材.pdf",
         pagesize=A4,
         rightMargin=2*cm,
         leftMargin=2*cm,
@@ -105,7 +105,7 @@ def create_pdf():
     
     # ===== 封面 =====
     story.append(Spacer(1, 4*cm))
-    story.append(Paragraph("人机协作学", title_style))
+    story.append(Paragraph("人机共智：AI时代的协作思维与实践", title_style))
     story.append(Spacer(1, 0.5*cm))
     story.append(Paragraph("Personal Empowerment in the AI Era", 
         ParagraphStyle('Subtitle', fontName=FONT_NAME, fontSize=14, textColor=SECONDARY, alignment=TA_CENTER)))
@@ -272,7 +272,7 @@ def create_pdf():
     
     # ===== 附录D：逻辑学基础 =====
     story.append(Paragraph("附录D：逻辑学基础（从零自学）", heading1_style))
-    add_md_file("模块补充-逻辑学基础.md")
+    add_md_file("7-模块六：逻辑思维基础.md")
     story.append(PageBreak())
     
     # ===== 结束页 =====
@@ -286,7 +286,7 @@ def create_pdf():
     
     # 构建 PDF
     doc.build(story)
-    print("PDF 教材已生成（中文优化版）：人机协作学-教材.pdf")
+    print("PDF 教材已生成：人机共智-教材.pdf")
 
 if __name__ == "__main__":
     create_pdf()
